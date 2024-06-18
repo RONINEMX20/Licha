@@ -99,7 +99,7 @@ STICKER = [
 ####
 
 PM_START_TEXT = """ 
-*❖ ʜᴇʏ {}, ᴡᴇʟᴄᴏᴍᴇ ʙᴀʙʏ* 🫦\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n●ɪ ᴀᴍ {}, ᴀɴᴅ ɪ ʜᴀᴠᴇ sᴘᴇᴄɪᴀʟ ғᴇᴀᴛᴜʀᴇs.\n\n● ᴜsᴇʀs ➥ {}\n● ᴄʜᴀᴛs ➥ {}\n\n❖ *I am Ms Licha a anime theme bot which can help you to manage and secure your group with huge group managment ecosystem.*"""
+*❖ ʜᴇʏ {}, ᴡᴇʟᴄᴏᴍᴇ ʙᴀʙʏ* 🫦\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n●ɪ ᴀᴍ {}, ᴀɴᴅ ɪ ʜᴀᴠᴇ sᴘᴇᴄɪᴀʟ ғᴇᴀᴛᴜʀᴇs.\n\n● ᴜsᴇʀs ➥ {}\n● ᴄʜᴀᴛs ➥ {}\n\n❖ *ɪ ᴀᴍ ᴍs ʟɪcʜᴀ, ᴀ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ʙᴏᴛ ᴡʜɪᴄʜ ᴄᴀɴ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏ ᴍᴀɴᴀɢᴇ ᴀɴᴅ sᴇᴄᴜʀᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴡɪᴛʜ ʜᴜɢᴇ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴍᴇɴɴᴛ ᴇᴄᴏsʏsᴛᴇᴍ.*"""
 
 buttons = [
     [
@@ -109,7 +109,7 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="Hell", callback_data="gib_source"),
+        InlineKeyboardButton(text="ʜᴇʟʟ", callback_data="gib_source"),
         InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="avisha_"),
     ],
     [
@@ -503,7 +503,7 @@ def Avisha_about_callback(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="avisha_back"),
-                        InlineKeyboardButton(text="support ʜᴇʟᴘ", url="https://t.me/botXaid"),
+                        InlineKeyboardButton(text="ʜᴇʟᴘ", url="https://t.me/botXaid"),
                     ],
                 ]
             ),
