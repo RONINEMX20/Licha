@@ -99,7 +99,7 @@ STICKER = [
 ####
 
 PM_START_TEXT = """ 
-*❖ ʜᴇʏ {}, ᴡᴇʟᴄᴏᴍᴇ ʙᴀʙʏ* 🫦\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n●ɪ ᴀᴍ {}, ᴀɴᴅ ɪ ʜᴀᴠᴇ sᴘᴇᴄɪᴀʟ ғᴇᴀᴛᴜʀᴇs.\n\n● ᴜsᴇʀs ➥ {}\n● ᴄʜᴀᴛs ➥ {}\n\n❖ *ɪ ᴀᴍ ᴍs ʟɪcʜᴀ, ᴀ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ʙᴏᴛ ᴡʜɪᴄʜ ᴄᴀɴ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏ ᴍᴀɴᴀɢᴇ ᴀɴᴅ sᴇᴄᴜʀᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴡɪᴛʜ ʜᴜɢᴇ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴍᴇɴɴᴛ ᴇᴄᴏsʏsᴛᴇᴍ.*"""
+*❖ ʜᴇʏ {}, ᴡᴇʟᴄᴏᴍᴇ ʙᴀʙʏ* 🫧\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n●ɪ ᴀᴍ {}, ᴀɴᴅ ɪ ʜᴀᴠᴇ sᴘᴇᴄɪᴀʟ ғᴇᴀᴛᴜʀᴇs.\n\n● ᴜsᴇʀs ➥ {}\n● ᴄʜᴀᴛs ➥ {}\n\n❖ *ɪ ᴀᴍ ᴍs ʟɪcʜᴀ, ᴀ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ʙᴏᴛ ᴡʜɪᴄʜ ᴄᴀɴ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏ ᴍᴀɴᴀɢᴇ ᴀɴᴅ sᴇᴄᴜʀᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴡɪᴛʜ ʜᴜɢᴇ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴍᴇɴɴᴛ ᴇᴄᴏsʏsᴛᴇᴍ.*"""
 
 buttons = [
     [
@@ -357,7 +357,7 @@ def start(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_photo(
             random.choice(NYKAA),
-            caption="⬤ ๛L i c h a ࿐ ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.\n\n⬤ ᴜᴘᴛɪᴍᴇ ➥ <code>{}</code>".format(
+            caption="⬤ ๛ʟ ɪ c ʜ ᴀ ࿐ ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.\n\n⬤ ᴜᴘᴛɪᴍᴇ ➥ <code>{}</code>".format(
                 uptime
             ),
             reply_markup=InlineKeyboardMarkup(roy),
@@ -1185,7 +1185,7 @@ def main():
 **● ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ ➥** `{tlhver}`
 **● ᴩʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ ➥** `{pyrover}`
 
-**❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ [๛L i c h a ࿐](https://t.me/botXaid)**
+**❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ [๛ʟ ɪ c ʜ ᴀ ࿐](https://t.me/botXaid)**
      ━━━━━━━━ ⊱◈◈◈⊰ ━━━━━━━━
 """,reply_markup=x,
                 parse_mode=ParseMode.MARKDOWN,
