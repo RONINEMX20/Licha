@@ -99,7 +99,7 @@ STICKER = [
 ####
 
 PM_START_TEXT = """ 
-*❖ ʜᴇʏ {}, ᴡᴇʟᴄᴏᴍᴇ ʙᴀʙʏ* ♥︎\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n●ɪ ᴀᴍ {}, ᴀɴᴅ ɪ ʜᴀᴠᴇ sᴘᴇᴄɪᴀʟ ғᴇᴀᴛᴜʀᴇs.\n\n● ᴜsᴇʀs ➥ {}\n● ᴄʜᴀᴛs ➥ {}\n\n❖ *ɪ ʜᴀᴠᴇ ᴍᴏsᴛ ᴘᴏᴡᴇʀғᴜʟʟ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ + ᴍᴜsɪᴄ ʙᴏᴛ ғᴇᴀᴛᴜʀᴇs.*"""
+*❖ ʜᴇʏ {}, ᴡᴇʟᴄᴏᴍᴇ ʙᴀʙʏ* ♥︎\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n●ɪ ᴀᴍ {}, ᴀɴᴅ ɪ ʜᴀᴠᴇ sᴘᴇᴄɪᴀʟ ғᴇᴀᴛᴜʀᴇs.\n\n● ᴜsᴇʀs ➥ {}\n● ᴄʜᴀᴛs ➥ {}\n\n❖ *I am Ms Licha a anime theme bot which can help you to manage and secure your group with huge group managment ecosystem.*"""
 
 buttons = [
     [
@@ -109,7 +109,7 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="ʀᴇᴘᴏ", callback_data="gib_source"),
+        InlineKeyboardButton(text="Hell", callback_data="gib_source"),
         InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="avisha_"),
     ],
     [
@@ -357,7 +357,7 @@ def start(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_photo(
             random.choice(NYKAA),
-            caption="⬤ ๛ᴀ ᴠ ɪ s ʜ ᴀ ࿐ ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.\n\n⬤ ᴜᴘᴛɪᴍᴇ ➥ <code>{}</code>".format(
+            caption="⬤ ๛L i c h a ࿐ ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.\n\n⬤ ᴜᴘᴛɪᴍᴇ ➥ <code>{}</code>".format(
                 uptime
             ),
             reply_markup=InlineKeyboardMarkup(roy),
@@ -487,7 +487,7 @@ def Avisha_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "avisha_":
         uptime = get_readable_time((time.time() - StartTime))
-        query.message.edit_caption(f"*❖ ɪ ʜᴀᴠᴇ ᴍᴏsᴛ ᴘᴏᴡᴇʀғᴜʟʟ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ + ᴍᴜsɪᴄ ʙᴏᴛ ғᴇᴀᴛᴜʀᴇs.*"
+        query.message.edit_caption(f"*❖ ɪ ʜᴀᴠᴇ ᴍᴏsᴛ ᴘᴏᴡᴇʀғᴜʟʟ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ғᴇᴀᴛᴜʀᴇs.*"
             "\n\n● ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ."
             f"\n\n● ᴛᴏᴛᴀʟ ᴜsᴇʀs ➥ {sql.num_users()}"
             f"\n● ᴛᴏᴛᴀʟ ᴄʜᴀᴛs ➥ {sql.num_chats()}"
@@ -503,7 +503,7 @@ def Avisha_about_callback(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="avisha_back"),
-                        InlineKeyboardButton(text="ᴄᴄ ʜᴇʟᴘ", url="https://t.me/h_cc_help"),
+                        InlineKeyboardButton(text="support ʜᴇʟᴘ", url="https://t.me/botXaid"),
                     ],
                 ]
             ),
@@ -517,7 +517,7 @@ def Avisha_about_callback(update: Update, context: CallbackContext):
                     [
                         InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="avisha_back"),
                         InlineKeyboardButton(
-                            text="ᴜᴘᴅᴀᴛᴇ", url=f"https://t.me/roy_editx"
+                            text="ᴜᴘᴅᴀᴛᴇ", url=f"https://t.me/botXaid"
                         ),
                     ],
                 ]
@@ -1166,7 +1166,7 @@ def main():
                     [
                         InlineKeyboardButton(
                             text="ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ",
-                            url="https://t.me/avishaxbot?startgroup=true"
+                            url="https://t.me/botXaidt?startgroup=true"
                             )
                        ]
                 ]
@@ -1185,7 +1185,7 @@ def main():
 **● ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ ➥** `{tlhver}`
 **● ᴩʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ ➥** `{pyrover}`
 
-**❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ [๛ᴀ ᴠ ɪ s ʜ ᴀ ࿐](https://t.me/roy_editx)**
+**❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ [๛L i c h a ࿐](https://t.me/botXaid)**
      ━━━━━━━━ ⊱◈◈◈⊰ ━━━━━━━━
 """,reply_markup=x,
                 parse_mode=ParseMode.MARKDOWN,
