@@ -112,7 +112,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(text="❅ ʜᴇʟʟ ❅", callback_data="gib_source"),
-        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="avisha_"),
+        InlineKeyboardButton(text="❅ ᴀʙᴏᴜᴛ ❅", callback_data="avisha_"),
     ],
     [
         InlineKeyboardButton(text="❅ ʜᴇʟᴘ ᴄᴏᴍᴍᴀɴᴅs ❅", callback_data="Main_help"),
@@ -326,29 +326,29 @@ def start(update: Update, context: CallbackContext):
                 PM_START_TEX.format(usr.first_name), parse_mode=ParseMode.MARKDOWN
             )
             time.sleep(0.4)
-            lol.edit_text("🔟")
+            lol.edit_text("🩵")
             time.sleep(0.3)
-            lol.edit_text("9️⃣")
+            lol.edit_text("🩶")
             time.sleep(0.3)
-            lol.edit_text("8️⃣")
+            lol.edit_text("🩷")
             time.sleep(0.3)
-            lol.edit_text("7️⃣")
+            lol.edit_text("💜")
             time.sleep(0.3)
-            lol.edit_text("6️⃣")
+            lol.edit_text("💛")
             time.sleep(0.3)
-            lol.edit_text("5️⃣")
+            lol.edit_text("💚")
             time.sleep(0.3)
-            lol.edit_text("4️⃣")
+            lol.edit_text("🧡")
             time.sleep(0.3)
-            lol.edit_text("3️⃣")
+            lol.edit_text("💙")
             time.sleep(0.3)
-            lol.edit_text("2️⃣")
+            lol.edit_text("💗")
             time.sleep(0.3)
-            lol.edit_text("1️⃣")
+            lol.edit_text("❤️")
             time.sleep(0.3)
-            lol.edit_text("0️⃣")
+            lol.edit_text("🖤")
             time.sleep(0.3)
-            lol.edit_text("ʟᴇᴛ's ɢᴏ...♥︎")
+            lol.edit_text("ʟᴇᴛ's ɢᴏ...🌮")
             lol.delete()
             
             update.effective_message.reply_photo(random.choice(NYKAA),PM_START_TEXT.format(escape_markdown(first_name),BOT_NAME,sql.num_users(),sql.num_chats()),
@@ -359,7 +359,7 @@ def start(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_photo(
             random.choice(NYKAA),
-            caption="⬤ ๛ʟ ɪ c ʜ ᴀ ࿐ ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.\n\n⬤ ᴜᴘᴛɪᴍᴇ ➥ <code>{}</code>".format(
+            caption="么 ๛ʟ ɪ c ʜ ᴀ ࿐ ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.\n\n么 ᴜᴘᴛɪᴍᴇ ✾ <code>{}</code>".format(
                 uptime
             ),
             reply_markup=InlineKeyboardMarkup(roy),
@@ -490,15 +490,15 @@ def Avisha_about_callback(update: Update, context: CallbackContext):
     if query.data == "avisha_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_caption(f"*❖ ɪ ʜᴀᴠᴇ ᴍᴏsᴛ ᴘᴏᴡᴇʀғᴜʟʟ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ғᴇᴀᴛᴜʀᴇs.*"
-            "\n\n● ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ."
-            f"\n\n● ᴛᴏᴛᴀʟ ᴜsᴇʀs ➥ {sql.num_users()}"
-            f"\n● ᴛᴏᴛᴀʟ ᴄʜᴀᴛs ➥ {sql.num_chats()}"
-            "\n\n● ɪ ᴄᴀɴ ʀᴇꜱᴛʀɪᴄᴛ ᴜꜱᴇʀꜱ."
-            "\n● ɪ ʜᴀᴠᴇ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴛɪ-ꜰʟᴏᴏᴅ ꜱʏꜱᴛᴇᴍ."
-            "\n● ᴀᴅᴠᴀɴᴄᴇ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ᴄᴀᴘᴀʙɪʟɪᴛʏ."
-            "\n● ᴀɴɪᴍᴇ ʙᴏᴛ ғᴜɴᴄᴛɪᴏɴᴀʟɪᴛʏ."
-            "\n● ᴀɪ ɪɴᴛᴇɢʀᴀᴛɪᴏɴ."
-            f"\n\n*❖ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ {dispatcher.bot.first_name}.*",
+            "\n\n么 ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ."
+            f"\n\n么 ᴛᴏᴛᴀʟ ᴜsᴇʀs ✾ {sql.num_users()}"
+            f"\n么 ᴛᴏᴛᴀʟ ᴄʜᴀᴛs ✾ {sql.num_chats()}"
+            "\n\n么 ɪ ᴄᴀɴ ʀᴇꜱᴛʀɪᴄᴛ ᴜꜱᴇʀꜱ."
+            "\n么 ɪ ʜᴀᴠᴇ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴛɪ-ꜰʟᴏᴏᴅ ꜱʏꜱᴛᴇᴍ."
+            "\n么 ᴀᴅᴠᴀɴᴄᴇ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ᴄᴀᴘᴀʙɪʟɪᴛʏ."
+            "\n么 ᴀɴɪᴍᴇ ʙᴏᴛ ғᴜɴᴄᴛɪᴏɴᴀʟɪᴛʏ."
+            "\n么 ᴀɪ ɪɴᴛᴇɢʀᴀᴛɪᴏɴ."
+            f"\n\n*❅ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ {dispatcher.bot.first_name}.*",
             parse_mode=ParseMode.MARKDOWN,
                                    
             reply_markup=InlineKeyboardMarkup(
@@ -1179,16 +1179,16 @@ def main():
                 f"@{SUPPORT_CHAT}",
                 photo=f"{START_IMG}",
                 caption=f"""
-❖ㅤ{BOT_NAME} ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ ❖
-     ━━━━━━━━ ⊱◈◈◈⊰ ━━━━━━━━
+❅ㅤ{BOT_NAME} ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ ❅
+     ━━━━ ⊱◈◈◈⊰ ━━━━
      
-**● ᴘʏᴛʜᴏɴ ᴠᴇʀsɪᴏɴ ➥** `{y()}`
-**● ʟɪʙʀᴀʀʏ ᴠᴇʀsɪᴏɴ ➥** `{telever}`
-**● ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ ➥** `{tlhver}`
-**● ᴩʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ ➥** `{pyrover}`
+**么 ᴘʏᴛʜᴏɴ ᴠᴇʀsɪᴏɴ ✾** `{y()}`
+**么 ʟɪʙʀᴀʀʏ ᴠᴇʀsɪᴏɴ ✾** `{telever}`
+**么 ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ ✾** `{tlhver}`
+**么 ᴩʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ ✾** `{pyrover}`
 
 **❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ [๛ʟ ɪ c ʜ ᴀ ࿐](https://t.me/botXaid)**
-     ━━━━━━━━ ⊱◈◈◈⊰ ━━━━━━━━
+     ━━━━ ⊱◈◈◈⊰ ━━━━
 """,reply_markup=x,
                 parse_mode=ParseMode.MARKDOWN,
             )
