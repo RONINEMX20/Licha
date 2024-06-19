@@ -8,7 +8,7 @@ fake = Faker()
 
 EVAA = [
     [
-        InlineKeyboardButton(text="ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/avishaxbot?startgroup=true"),
+        InlineKeyboardButton(text="ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/lichaxbot?startgroup=true"),
     ],
 ]
 
@@ -46,7 +46,7 @@ def generate_info(client, message):
         
         f"**● ᴢɪᴘᴄᴏᴅᴇ ➥** {zipcode}\n\n"
 
-        f"❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ ๛ᴀ ᴠ ɪ s ʜ ᴀ ࿐"
+        f"❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ ๛ʟ ɪ c ʜ ᴀ ࿐"
     )
 ###
     
