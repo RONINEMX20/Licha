@@ -64,7 +64,7 @@ from telethon import __version__ as s
 from AvishaRobot import OWNER_ID, dispatcher
 from AvishaRobot import pbot as client
 
-AVISHA = "https://telegra.ph/file/752df9a58b6b2f38db493.jpg"
+AVISHA = "https://graph.org/file/dcc62e53435a919373a0a.jpg"
 
 
 @client.on_message(filters.command(["repo", "source"]))
