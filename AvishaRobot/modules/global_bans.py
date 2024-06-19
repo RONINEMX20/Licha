@@ -171,7 +171,7 @@ def gban(update: Update, context: CallbackContext):
         chat_origin = "<b>{}</b>\n".format(chat.id)
 
     log_message = (
-        f"⬤ ᴜsᴇʀ #ɢʙᴀɴɴᴇᴅ ⏤͟͟͞͞★\n\n"
+        f"⬤ ᴜsᴇʀ ɢʙᴀɴɴᴇᴅ ⏤͟͟͞͞★\n\n"
         f"● <b>ᴏʀɢɪɴɪᴛᴇᴅ ғʀᴏᴍ ➥</b> <code>{chat_origin}</code>\n"
         f"● <b>ᴀᴅᴍɪɴ ➥</b> {mention_html(user.id, user.first_name)}\n"
         f"● <b>ʙᴀɴɴᴇᴅ ᴜsᴇʀ ➥</b> {mention_html(user_chat.id, user_chat.first_name)}\n"
@@ -252,9 +252,9 @@ def gban(update: Update, context: CallbackContext):
 
     if gban_time > 60:
         gban_time = round((gban_time / 60), 2)
-        message.reply_text("⬤ ᴅᴏɴᴇ ! ɢʙᴀɴɴᴇᴅ.", parse_mode=ParseMode.HTML)
+        message.reply_text("⬤ ᴅᴏɴᴇ ɢʙᴀɴɴᴇᴅ ! ᴀғғᴇᴄᴛᴇᴅ ᴄʜᴀᴛs ➥ ᨖ.", parse_mode=ParseMode.HTML)
     else:
-        message.reply_text("⬤ ᴅᴏɴᴇ ! ɢʙᴀɴɴᴇᴅ.", parse_mode=ParseMode.HTML)
+        message.reply_text("⬤ ᴅᴏɴᴇ ɢʙᴀɴɴᴇᴅ  ! ᴀғғᴇᴄᴛᴇᴅ ᴄʜᴀᴛs ➥ ᨖ.", parse_mode=ParseMode.HTML)
 
     try:
         bot.send_message(
@@ -307,7 +307,7 @@ def ungban(update: Update, context: CallbackContext):
         chat_origin = f"<b>{chat.id}</b>\n"
 
     log_message = (
-        f"✦ ᴜsᴇʀ #ᴜɴɢᴀɴɴᴇᴅ\n\n"
+        f"✦ ᴜsᴇʀ ᴜɴɢᴀɴɴᴇᴅ\n\n"
         f"❍ <b>ᴏʀɪɢɪɴᴀᴛᴇᴅ ғʀᴏᴍ ➠</b> <code>{chat_origin}</code>\n"
         f"❍ <b>ᴀᴅᴍɪɴ ➠</b> {mention_html(user.id, user.first_name)}\n"
         f"❍ <b>ᴜɴʙᴀɴɴᴇᴅ ᴜsᴇʀ ➠</b> {mention_html(user_chat.id, user_chat.first_name)}\n"
