@@ -38,7 +38,7 @@ def totranslate(update: Update, context: CallbackContext) -> None:
     translation = trans(to_translate, sourcelang=source, targetlang=dest)
     reply = (
         f"❖ <b>ᴛʀᴀɴsʟᴀᴛᴇᴅ ғʀᴏᴍ {source} ᴛᴏ {dest}</b> ➥\n\n"
-        f"♥︎ {translation.text}\n\n❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ ๛ᴀ ᴠ ɪ s ʜ ᴀ ࿐"
+        f"♥︎ {translation.text}\n\n❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ ๛ʟ ɪ c ʜ ᴀ ࿐"
     )
 
     message.reply_text(reply, parse_mode=ParseMode.HTML)
@@ -64,7 +64,7 @@ from telethon import __version__ as s
 from AvishaRobot import OWNER_ID, dispatcher
 from AvishaRobot import pbot as client
 
-AVISHA = "https://graph.org/file/dcc62e53435a919373a0a.jpg"
+AVISHA = "https://telegra.ph/file/752df9a58b6b2f38db493.jpg"
 
 
 @client.on_message(filters.command(["repo", "source"]))
@@ -91,7 +91,7 @@ async def repo(client, message):
 @app.on_callback_query(filters.regex("gib_source"))
 async def gib_repo_callback(_, callback_query):
     await callback_query.edit_message_media(
-        media=InputMediaVideo("https://telegra.ph/file/9235d57807362b4e227a3.mp4", has_spoiler=True),
+        media=InputMediaVideo("https://telegra.ph/file/ba8d2f578ca9e95f200b6.mp4", has_spoiler=True),
         reply_markup=InlineKeyboardMarkup(
             [
                 [close_button]
