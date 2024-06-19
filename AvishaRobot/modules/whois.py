@@ -25,13 +25,13 @@ def ReplyCheck(message: Message):
 
 
 infotext = (
-    "❖ ᴜsᴇʀ sʜᴏʀᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ⏤͟͟͞͞★\n\n"
-    "● ᴜsᴇʀ ɪᴅ ➥ `{user_id}`\n"
-    "● ғɪʀsᴛ ɴᴀᴍᴇ ➥ `{first_name}`\n"
-    "● ʟᴀsᴛ ɴᴀᴍᴇ ➥ `{last_name}`\n"
-    "● ᴜsᴇʀɴᴀᴍᴇ ➥ `@{username}`\n"
-    "● ʟᴀsᴛ sᴇᴇɴ ➥ `{last_online}`\n\n"
-    "❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ [๛ᴀ ᴠ ɪ s ʜ ᴀ ࿐](https://t.me/avishaxbot)"
+    "❅ ᴜsᴇʀ sʜᴏʀᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ⏤͟͟͞͞★\n\n"
+    "么 ᴜsᴇʀ ɪᴅ ✾ `{user_id}`\n"
+    "么 ғɪʀsᴛ ɴᴀᴍᴇ ✾ `{first_name}`\n"
+    "么 ʟᴀsᴛ ɴᴀᴍᴇ ✾ `{last_name}`\n"
+    "么 ᴜsᴇʀɴᴀᴍᴇ ✾ `@{username}`\n"
+    "么 ʟᴀsᴛ sᴇᴇɴ ✾ `{last_online}`\n\n"
+    "么 ᴘᴏᴡᴇʀᴇᴅ ʙʏ ✾ [๛ʟ ɪ c ʜ ᴀ ࿐](https://t.me/botxaid)"
 )
 
 
