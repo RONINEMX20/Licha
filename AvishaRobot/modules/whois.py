@@ -31,7 +31,7 @@ infotext = (
     "么 ʟᴀsᴛ ɴᴀᴍᴇ ✾ `{last_name}`\n"
     "么 ᴜsᴇʀɴᴀᴍᴇ ✾ `@{username}`\n"
     "么 ʟᴀsᴛ sᴇᴇɴ ✾ `{last_online}`\n\n"
-    "么 ᴘᴏᴡᴇʀᴇᴅ ʙʏ ✾ [๛ʟ ɪ c ʜ ᴀ ࿐](https://t.me/botxaid)"
+    "么 ᴘᴏᴡᴇʀᴇᴅ ʙʏ ✾ [๛ʟ ɪ c ʜ ᴀ ࿐](https://t.me/lichaxbot)"
 )
 
 
