@@ -1,111 +1,44 @@
-from telethon.tl.types import ChannelParticipantsAdmins
+import logging
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-from AvishaRobot import DRAGONS
-from AvishaRobot.modules.helper_funcs.telethn import IMMUNE_USERS, telethn
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
+# Telegram bot token
+TOKEN = 'YOUR_BOT_TOKEN'
 
-async def user_is_ban_protected(user_id: int, message):
-    status = False
-    if message.is_private or user_id in (IMMUNE_USERS):
-        return True
+# Command handler for /chatstatus
+def chat_status(update: Update, context: CallbackContext):
+    chat = update.effective_chat
 
-    async for user in telethn.iter_participants(
-        message.chat_id, filter=ChannelParticipantsAdmins
-    ):
-        if user_id == user.id:
-            status = True
-            break
-    return status
+    # Get basic information about the chat
+    chat_id = chat.id
+    chat_title = chat.title
+    chat_type = chat.type
+    chat_members_count = chat.get_members_count()
+    chat_administrators_count = chat.get_administrators_count()
 
+    message = f"Chat Title: {chat_title}\n"
+    message += f"Chat ID: {chat_id}\n"
+    message += f"Chat Type: {chat_type}\n"
+    message += f"Members Count: {chat_members_count}\n"
+    message += f"Administrators Count: {chat_administrators_count}\n"
 
-async def user_is_admin(user_id: int, message):
-    status = False
-    if message.is_private:
-        return True
+    update.message.reply_text(message)
 
-    async for user in telethn.iter_participants(
-        message.chat_id, filter=ChannelParticipantsAdmins
-    ):
-        if user_id == user.id or user_id in DRAGONS:
-            status = True
-            break
-    return status
+# Initialize the Updater and Dispatcher
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
+# Register command handler
+dispatcher.add_handler(CommandHandler('chatstatus', chat_status))
 
-async def is_user_admin(user_id: int, chat_id):
-    status = False
-    async for user in telethn.iter_participants(
-        chat_id, filter=ChannelParticipantsAdmins
-    ):
-        if user_id == user.id or user_id in DRAGONS:
-            status = True
-            break
-    return status
+# Main function to start the bot
+def main():
+    updater.start_polling()
+    logging.info("Bot started polling.")
+    updater.idle()
 
-
-async def avisha_is_admin(chat_id: int):
-    status = False
-    avisha = await telethn.get_me()
-    async for user in telethn.iter_participants(
-        chat_id, filter=ChannelParticipantsAdmins
-    ):
-        if avisha.id == user.id:
-            status = True
-            break
-    return status
-
-
-async def is_user_in_chat(chat_id: int, user_id: int):
-    status = False
-    async for user in telethn.iter_participants(chat_id):
-        if user_id == user.id:
-            status = True
-            break
-    return status
-
-
-async def can_change_info(message):
-    status = False
-    if message.chat.admin_rights:
-        status = message.chat.admin_rights.change_info
-    return status
-
-
-async def can_ban_users(message):
-    status = False
-    if message.chat.admin_rights:
-        status = message.chat.admin_rights.ban_users
-    return status
-
-
-async def can_pin_messages(message):
-    status = False
-    if message.chat.admin_rights:
-        status = message.chat.admin_rights.pin_messages
-    return status
-
-
-async def can_invite_users(message):
-    status = False
-    if message.chat.admin_rights:
-        status = message.chat.admin_rights.invite_users
-    return status
-
-
-async def can_add_admins(message):
-    status = False
-    if message.chat.admin_rights:
-        status = message.chat.admin_rights.add_admins
-    return status
-
-
-async def can_delete_messages(message):
-
-    if message.is_private:
-        return True
-    elif message.chat.admin_rights:
-        status = message.chat.admin_rights.delete_messages
-        return status
-    else:
-        return False
-      
+if __name__ == '__main__':
+    main()
