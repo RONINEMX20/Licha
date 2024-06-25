@@ -1,55 +1,72 @@
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
+from pymongo import MongoClient
+import logging
 
-from typing import Dict, Union
-import random
-from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-from AvishaRobot import MONGO_DB_URI
+# MongoDB connection
+client = MongoClient('mongodb://localhost:27017/')
+db = client.telegram_bot_db
+collection = db.afk_statuses
 
-mongo = MongoCli(MONGO_DB_URI)
-db = mongo.AvishaRobot
+# Telegram bot token
+TOKEN = 'YOUR_BOT_TOKEN'
 
-coupledb = db.couple
+# Command handler for /afk
+def afk(update: Update, context: CallbackContext):
+    user_id = update.effective_user.id
+    user_name = update.effective_user.username
+    args = context.args
+    reason = ' '.join(args) if args else None
+    
+    # Check if user is already AFK
+    if collection.find_one({'user_id': user_id}):
+        context.bot.send_message(chat_id=update.effective_chat.id, text="You are already AFK.")
+        return
+    
+    # Store AFK status in MongoDB
+    afk_data = {'user_id': user_id, 'user_name': user_name, 'reason': reason}
+    collection.insert_one(afk_data)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=f"{user_name} is now AFK.")
 
-
-afkdb = db.afk
-
-nightmodedb = db.nightmode
-
-notesdb = db.notes
-
-filtersdb = db.filters
-
-
-async def _get_lovers(cid: int):
-    lovers = await coupledb.find_one({"chat_id": cid})
-    if lovers:
-        lovers = lovers["couple"]
+# Command handler for /back
+def back(update: Update, context: CallbackContext):
+    user_id = update.effective_user.id
+    user_name = update.effective_user.username
+    
+    # Check if user is AFK
+    afk_data = collection.find_one({'user_id': user_id})
+    if afk_data:
+        collection.delete_one({'user_id': user_id})
+        context.bot.send_message(chat_id=update.effective_chat.id, text=f"{user_name} is back.")
     else:
-        lovers = {}
-    return lovers
+        context.bot.send_message(chat_id=update.effective_chat.id, text="You are not AFK.")
 
-async def _get_image(cid: int):
-    lovers = await coupledb.find_one({"chat_id": cid})
-    if lovers:
-        lovers = lovers["img"]
+# Command handler for /list_afk
+def list_afk(update: Update, context: CallbackContext):
+    afk_users = collection.find()
+    if afk_users.count() > 0:
+        afk_list = "\n".join([f"{user['user_name']} - Reason: {user['reason'] or 'Not provided'}" for user in afk_users])
+        context.bot.send_message(chat_id=update.effective_chat.id, text=f"Users AFK:\n{afk_list}")
     else:
-        lovers = {}
-    return lovers
+        context.bot.send_message(chat_id=update.effective_chat.id, text="No users are currently AFK.")
 
-async def get_couple(cid: int, date: str):
-    lovers = await _get_lovers(cid)
-    if date in lovers:
-        return lovers[date]
-    else:
-        return False
+# Initialize the Updater and Dispatcher
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
+# Register command handlers
+dispatcher.add_handler(CommandHandler('afk', afk))
+dispatcher.add_handler(CommandHandler('back', back))
+dispatcher.add_handler(CommandHandler('list_afk', list_afk))
 
-async def save_couple(cid: int, date: str, couple: dict, img: str):
-    lovers = await _get_lovers(cid)
-    lovers[date] = couple
-    await coupledb.update_one(
-        {"chat_id": cid},
-        {"$set": {"couple": lovers, "img": img}},
-        upsert=True,
-    )
-  
+# Main function
+def main():
+    updater.start_polling()
+    logging.info("Bot started polling.")
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
