@@ -1,41 +1,47 @@
-"""
-MIT License
+import logging
+import random
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-Copyright (c) 2025 tinaarobot 
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+# Telegram bot token
+TOKEN = 'YOUR_BOT_TOKEN'
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+# Command handler for /echo
+def echo(update: Update, context: CallbackContext):
+    text = ' '.join(context.args)
+    update.message.reply_text(text)
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-from functools import wraps
-from time import time
+# Command handler for /random
+def random_number(update: Update, context: CallbackContext):
+    args = context.args
+    if len(args) != 2:
+        update.message.reply_text("Please provide two integers: /random <min> <max>")
+        return
+    
+    try:
+        min_value = int(args[0])
+        max_value = int(args[1])
+        random_num = random.randint(min_value, max_value)
+        update.message.reply_text(f"Random number between {min_value} and {max_value}: {random_num}")
+    except ValueError:
+        update.message.reply_text("Invalid input. Please provide two integers.")
 
+# Initialize the Updater and Dispatcher
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
-def exec_time(func):
-    @wraps(func)
-    async def _time_it(*args, **kwargs):
-        t1 = time()
-        try:
-            return await func(*args, **kwargs)
-        finally:
-            t2 = time()
-            total = t2 - t1
-            total = round(total, 3)
-            print(f"{func.__name__} Took: {total} Seconds")
+# Register command handlers
+dispatcher.add_handler(CommandHandler('echo', echo))
+dispatcher.add_handler(CommandHandler('random', random_number))
 
-    return _time_it
+# Main function
+def main():
+    updater.start_polling()
+    logging.info("Bot started polling.")
+    updater.idle()
 
+if __name__ == '__main__':
+    main()
