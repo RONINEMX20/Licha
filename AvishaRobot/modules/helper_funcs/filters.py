@@ -1,49 +1,58 @@
-from telegram import Message
-from telegram.ext import MessageFilter
+import logging
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-from AvishaRobot import DEMONS, DEV_USERS, DRAGONS
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
+# Telegram bot token
+TOKEN = 'YOUR_BOT_TOKEN'
 
-class CustomFilters(object):
-    class _Supporters(MessageFilter):
-        def filter(self, message: Message):
-            return bool(message.from_user and message.from_user.id in DEMONS)
+# Command handler for /start
+def start(update: Update, context: CallbackContext):
+    update.message.reply_text('Hello! Send me a message or a file to see different filters in action.')
 
-    support_filter = _Supporters()
+# Message handler for text messages
+def text_message(update: Update, context: CallbackContext):
+    update.message.reply_text('You sent a text message!')
 
-    class Sudoers(MessageFilter):
-        def filter(self, message: Message):
-            return bool(message.from_user and message.from_user.id in DRAGONS)
+# Message handler for photo messages
+def photo_message(update: Update, context: CallbackContext):
+    update.message.reply_text('You sent a photo!')
 
-    sudo_filter = Sudoers()
+# Message handler for document messages
+def document_message(update: Update, context: CallbackContext):
+    update.message.reply_text('You sent a document!')
 
-    class Developers(MessageFilter):
-        def filter(self, message: Message):
-            return bool(message.from_user and message.from_user.id in DEV_USERS)
+# Message handler for replies
+def reply_message(update: Update, context: CallbackContext):
+    update.message.reply_text('You replied or mentioned me!')
 
-    dev_filter = Developers()
+# Message handler for unknown messages
+def unknown(update: Update, context: CallbackContext):
+    update.message.reply_text("Sorry, I didn't understand that message.")
 
-    class _MimeType(MessageFilter):
-        def __init__(self, mimetype):
-            self.mime_type = mimetype
-            self.name = "CustomFilters.mime_type({})".format(self.mime_type)
+# Initialize the Updater and Dispatcher
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
-        def filter(self, message: Message):
-            return bool(
-                message.document and message.document.mime_type == self.mime_type,
-            )
+# Register command handler
+dispatcher.add_handler(CommandHandler('start', start))
 
-    mime_type = _MimeType
+# Register message handlers with filters
+dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, text_message))
+dispatcher.add_handler(MessageHandler(Filters.photo, photo_message))
+dispatcher.add_handler(MessageHandler(Filters.document, document_message))
+dispatcher.add_handler(MessageHandler(Filters.reply, reply_message))
 
-    class _HasText(MessageFilter):
-        def filter(self, message: Message):
-            return bool(
-                message.text
-                or message.sticker
-                or message.photo
-                or message.document
-                or message.video,
-            )
+# Fallback handler for unknown messages
+dispatcher.add_handler(MessageHandler(Filters.all, unknown))
 
-    has_text = _HasText()
-  
+# Main function to start the bot
+def main():
+    updater.start_polling()
+    logging.info("Bot started polling.")
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
