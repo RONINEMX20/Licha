@@ -1,180 +1,51 @@
-from typing import List, Optional, Union
+import logging
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-from telegram.ext import (
-    CallbackQueryHandler,
-    CommandHandler,
-    InlineQueryHandler,
-    MessageHandler,
-)
-from telegram.ext.filters import MessageFilter
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-from AvishaRobot import LOGGER
-from AvishaRobot import dispatcher as n
-from AvishaRobot.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
+# Telegram bot token
+TOKEN = 'YOUR_BOT_TOKEN'
 
+# Decorator to log information about incoming messages
+def log_message(func):
+    def wrapper(update: Update, context: CallbackContext):
+        user = update.effective_user
+        if user:
+            username = user.username
+            user_id = user.id
+            logging.info(f"Received message from {username} (ID: {user_id}): {update.message.text}")
+        else:
+            logging.info(f"Received message from unknown user: {update.message.text}")
+        return func(update, context)
+    return wrapper
 
-class AvishaTelegramHandler:
-    def __init__(self, n):
-        self._dispatcher = n
+# Command handler for /start
+@log_message
+def start(update: Update, context: CallbackContext):
+    update.message.reply_text('Hello! This is the start command.')
 
-    def command(
-        self,
-        command: str,
-        filters: Optional[MessageFilter] = None,
-        admin_ok: bool = False,
-        pass_args: bool = False,
-        pass_chat_data: bool = False,
-        run_async: bool = True,
-        can_disable: bool = True,
-        group: Optional[Union[int, str]] = 40,
-    ):
-        def _command(func):
-            try:
-                if can_disable:
-                    self._dispatcher.add_handler(
-                        DisableAbleCommandHandler(
-                            command,
-                            func,
-                            filters=filters,
-                            run_async=run_async,
-                            pass_args=pass_args,
-                            admin_ok=admin_ok,
-                        ),
-                        group,
-                    )
-                else:
-                    self._dispatcher.add_handler(
-                        CommandHandler(
-                            command,
-                            func,
-                            filters=filters,
-                            run_async=run_async,
-                            pass_args=pass_args,
-                        ),
-                        group,
-                    )
-                LOGGER.debug(
-                    f"[AvishaCmd] Loaded handler {command} for function {func.__name__} in group {group}"
-                )
-            except TypeError:
-                if can_disable:
-                    self._dispatcher.add_handler(
-                        DisableAbleCommandHandler(
-                            command,
-                            func,
-                            filters=filters,
-                            run_async=run_async,
-                            pass_args=pass_args,
-                            admin_ok=admin_ok,
-                            pass_chat_data=pass_chat_data,
-                        )
-                    )
-                else:
-                    self._dispatcher.add_handler(
-                        CommandHandler(
-                            command,
-                            func,
-                            filters=filters,
-                            run_async=run_async,
-                            pass_args=pass_args,
-                            pass_chat_data=pass_chat_data,
-                        )
-                    )
-                LOGGER.debug(
-                    f"[AvishaCMd] Loaded handler {command} for function {func.__name__}"
-                )
+# Message handler with the decorator
+@log_message
+def echo(update: Update, context: CallbackContext):
+    update.message.reply_text(update.message.text)
 
-            return func
+# Initialize the Updater and Dispatcher
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
-        return _command
+# Register command handler
+dispatcher.add_handler(CommandHandler('start', start))
 
-    def message(
-        self,
-        pattern: Optional[str] = None,
-        can_disable: bool = True,
-        run_async: bool = True,
-        group: Optional[Union[int, str]] = 60,
-        friendly=None,
-    ):
-        def _message(func):
-            try:
-                if can_disable:
-                    self._dispatcher.add_handler(
-                        DisableAbleMessageHandler(
-                            pattern, func, friendly=friendly, run_async=run_async
-                        ),
-                        group,
-                    )
-                else:
-                    self._dispatcher.add_handler(
-                        MessageHandler(pattern, func, run_async=run_async), group
-                    )
-                LOGGER.debug(
-                    f"[AvishaMsg] Loaded filter pattern {pattern} for function {func.__name__} in group {group}"
-                )
-            except TypeError:
-                if can_disable:
-                    self._dispatcher.add_handler(
-                        DisableAbleMessageHandler(
-                            pattern, func, friendly=friendly, run_async=run_async
-                        )
-                    )
-                else:
-                    self._dispatcher.add_handler(
-                        MessageHandler(pattern, func, run_async=run_async)
-                    )
-                LOGGER.debug(
-                    f"[AvishaRobot-Msg] Loaded filter pattern {pattern} for function {func.__name__}"
-                )
+# Register message handler for all text messages
+dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
 
-            return func
+# Main function to start the bot
+def main():
+    updater.start_polling()
+    logging.info("Bot started polling.")
+    updater.idle()
 
-        return _message
-
-    def callbackquery(self, pattern: str = None, run_async: bool = True):
-        def _callbackquery(func):
-            self._dispatcher.add_handler(
-                CallbackQueryHandler(
-                    pattern=pattern, callback=func, run_async=run_async
-                )
-            )
-            LOGGER.debug(
-                f"[AvishaRobot-Callback] Loaded callbackquery handler with pattern {pattern} for function {func.__name__}"
-            )
-            return func
-
-        return _callbackquery
-
-    def inlinequery(
-        self,
-        pattern: Optional[str] = None,
-        run_async: bool = True,
-        pass_user_data: bool = True,
-        pass_chat_data: bool = True,
-        chat_types: List[str] = None,
-    ):
-        def _inlinequery(func):
-            self._dispatcher.add_handler(
-                InlineQueryHandler(
-                    pattern=pattern,
-                    callback=func,
-                    run_async=run_async,
-                    pass_user_data=pass_user_data,
-                    pass_chat_data=pass_chat_data,
-                    chat_types=chat_types,
-                )
-            )
-            LOGGER.debug(
-                f"[AvishaINLINE] Loaded inlinequery handler with pattern {pattern} for function {func.__name__} | PASSES "
-                f"USER DATA: {pass_user_data} | PASSES CHAT DATA: {pass_chat_data} | CHAT TYPES: {chat_types}"
-            )
-            return func
-
-        return _inlinequery
-
-
-Avishacmd = AvishaTelegramHandler(n).command
-Avishamsg = AvishaTelegramHandler(n).message
-Avishacallback = AvishaTelegramHandler(n).callbackquery
-Avishainline = AvishaTelegramHandler(n).inlinequery
-              
+if __name__ == '__main__':
+    main()
