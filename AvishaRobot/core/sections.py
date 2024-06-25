@@ -1,49 +1,62 @@
-"""
-MIT License
+import logging
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-Copyright (c) 2025 tinaarobot 
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+# Telegram bot token
+TOKEN = 'YOUR_BOT_TOKEN'
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+# In-memory storage for sections (for demonstration purposes)
+sections = []
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
+# Command handler for /add_section
+def add_section(update: Update, context: CallbackContext):
+    if context.args:
+        section_name = ' '.join(context.args)
+        if section_name not in sections:
+            sections.append(section_name)
+            update.message.reply_text(f"Section '{section_name}' added.")
+        else:
+            update.message.reply_text(f"Section '{section_name}' already exists.")
+    else:
+        update.message.reply_text("Please provide a section name to add.")
 
-n = "\n"
-w = " "
+# Command handler for /list_sections
+def list_sections(update: Update, context: CallbackContext):
+    if sections:
+        section_list = '\n'.join(sections)
+        update.message.reply_text(f"Sections:\n{section_list}")
+    else:
+        update.message.reply_text("No sections added yet.")
 
-bold = lambda x: f"**{x}:** "
-bold_ul = lambda x: f"**--{x}:**-- "
+# Command handler for /remove_section
+def remove_section(update: Update, context: CallbackContext):
+    if context.args:
+        section_name = ' '.join(context.args)
+        if section_name in sections:
+            sections.remove(section_name)
+            update.message.reply_text(f"Section '{section_name}' removed.")
+        else:
+            update.message.reply_text(f"Section '{section_name}' does not exist.")
+    else:
+        update.message.reply_text("Please provide a section name to remove.")
 
-mono = lambda x: f"`{x}`{n}"
+# Initialize the Updater and Dispatcher
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
+# Register command handlers
+dispatcher.add_handler(CommandHandler('add_section', add_section))
+dispatcher.add_handler(CommandHandler('list_sections', list_sections))
+dispatcher.add_handler(CommandHandler('remove_section', remove_section))
 
-def section(
-        title: str,
-        body: dict,
-        indent: int = 2,
-        underline: bool = False,
-) -> str:
-    text = (bold_ul(title) + n) if underline else bold(title) + n
+# Main function
+def main():
+    updater.start_polling()
+    logging.info("Bot started polling.")
+    updater.idle()
 
-    for key, value in body.items():
-        text += (
-                indent * w
-                + bold(key)
-                + ((value[0] + n) if isinstance(value, list) else mono(value))
-        )
-    return text
-
+if __name__ == '__main__':
+    main()
