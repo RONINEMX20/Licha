@@ -1,33 +1,34 @@
-from AvishaRobot.Love.mongo import db
+from telegram import Update, ParseMode
+from telegram.ext import Updater, CommandHandler, CallbackContext
+import logging
 
-afkdb = db.afk
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
+# Telegram bot token
+TOKEN = 'YOUR_BOT_TOKEN'
 
-async def is_afk(user_id: int) -> bool:
-    user = await afkdb.find_one({"user_id": user_id})
-    if not user:
-        return False, {}
-    return True, user["reason"]
+# Command handler for /afk
+def afk(update: Update, context: CallbackContext):
+    user = update.effective_user
+    args = context.args
+    reason = ' '.join(args)
+    
+    if not reason:
+        context.bot.send_message(chat_id=update.effective_chat.id, text=f"{user.first_name} is now AFK.")
+    else:
+        context.bot.send_message(chat_id=update.effective_chat.id, text=f"{user.first_name} is now AFK with reason: {reason}.")
 
+def main():
+    updater = Updater(token=TOKEN, use_context=True)
+    dispatcher = updater.dispatcher
+    
+    # Register command handlers
+    dispatcher.add_handler(CommandHandler('afk', afk))
+    
+    # Start the Bot
+    updater.start_polling()
+    updater.idle()
 
-async def add_afk(user_id: int, mode):
-    await afkdb.update_one(
-        {"user_id": user_id}, {"$set": {"reason": mode}}, upsert=True
-    )
-
-
-async def remove_afk(user_id: int):
-    user = await afkdb.find_one({"user_id": user_id})
-    if user:
-        return await afkdb.delete_one({"user_id": user_id})
-
-
-async def get_afk_users() -> list:
-    users = afkdb.find({"user_id": {"$gt": 0}})
-    if not users:
-        return []
-    users_list = []
-    for user in await users.to_list(length=1000000000):
-        users_list.append(user)
-    return users_list
-  
+if __name__ == '__main__':
+    main()
